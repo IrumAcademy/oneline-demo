@@ -10,6 +10,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
@@ -38,6 +39,10 @@ export default function LoginPage() {
   async function 회원가입() {
     set기다리는중(true);
     set알림("");
+
+    // ⑥회차 · 가입 버튼을 누른 순간을 셉니다.
+    // 실제로 가입에 성공했는지는 아래에서 갈립니다 — 둘의 차이가 곧 이탈률입니다.
+    track("signup_clicked");
 
     const { error } = await supabase.auth.signUp({ email, password });
 

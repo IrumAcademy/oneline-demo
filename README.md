@@ -62,71 +62,52 @@ git checkout week6-done     # ⑤⑥회차 완료 상태
 
 ---
 
-## 이 브랜치 — `week5-done`
+## 이 브랜치 — `week6-done`
 
-**③④회차(5주차)를 마친 상태**입니다. ①②회차 결과물도 그대로 들어 있습니다.
+**⑤⑥회차(6주차)를 마친, 과정 최종 상태**입니다. ①~④회차 결과물이 전부 들어 있습니다.
 
-`lib/store.ts` 가 더 이상 브라우저 메모리가 아닙니다. 새로고침해도 사라지지 않고,
-손님(브라우저)은 창고에 직접 들어가지 않습니다. 웨이터(`/api/lines`)를 거칩니다.
-
-### 무엇이 바뀌었나
+### 무엇이 더해졌나
 
 | 파일 | 회차 | 내용 |
 |---|---|---|
-| `supabase/schema.sql` | ③④ | 표 만들기 + RLS 정책 전문 |
-| `lib/supabase.ts` | ③ | 창고 연결 |
-| `lib/store.ts` | ③ | 메모리 저장 로직이 사라지고 타입만 남음 |
-| `app/api/lines/route.ts` | ④ | 웨이터 — GET · POST · DELETE |
-| `app/login/page.tsx` | ④ | 입구 — 회원가입 · 로그인 |
-| `app/page.tsx` | ④ | 창고 직접 접근 → API 호출로 교체 |
+| `app/layout.tsx` | ⑤⑥ | OG 메타태그(카톡 미리보기) + `<Analytics />` 한 줄 |
+| `app/sitemap.ts` | ⑤ | `/sitemap.xml` — 검색엔진에게 주는 지도 |
+| `app/robots.ts` | ⑤ | `/robots.txt` — 어디를 봐도 되는지 안내 |
+| `app/page.tsx` | ⑥ | `track("post_created")` |
+| `app/login/page.tsx` | ⑥ | `track("signup_clicked")` |
 
-### 합류하는 법 — 코드만 받아서는 안 돌아갑니다
+### 저장소에 들어오지 않는 것
 
-이 브랜치를 받아도 **창고는 각자 만들어야 합니다.** 순서대로 하세요.
+⑤회차 작업의 절반은 코드가 아니라 **설정**입니다. 이 브랜치를 받아도 따라오지 않습니다.
 
-**1. 코드 받기**
+- Vercel 프로젝트 연결과 환경변수 등록 (`.env.local` 의 값을 Vercel에도 넣어야 합니다)
+- 도메인 구매와 DNS 연결
+- Google Search Console · 네이버 서치어드바이저 등록
+
+### 합류하는 법
+
+`week5-done` 과 동일합니다(창고 만들기 → `schema.sql` 실행 → `.env.local` 채우기).
+거기에 두 가지만 더 하시면 됩니다.
 
 ```powershell
 git fetch origin
-git checkout week5-done
+git checkout week6-done
 npm install
 ```
 
-**2. 내 창고 만들기** — supabase.com 에서 프로젝트 생성 (지역: 서울)
+**1. `.env.local` 에 주소 한 줄 추가**
 
-**3. 창고에 표 만들기** — Supabase → SQL Editor 에 `supabase/schema.sql` 을 통째로 붙여넣고 실행
-
-**4. 열쇠 적어두기**
-
-```powershell
-cp .env.example .env.local
+```
+NEXT_PUBLIC_SITE_URL=https://내도메인.com
 ```
 
-Supabase → Project Settings → Data API 에서 URL 과 anon key 를 복사해
-`.env.local` 에 채웁니다. **`.env.local` 은 절대 커밋하지 마세요.**
+없으면 `http://localhost:3000` 으로 동작합니다. 배포 후에 진짜 주소로 바꾸세요.
 
-**5. 실행**
+**2. Vercel 에서 Analytics 켜기** — 프로젝트 → Analytics 탭 → Enable
 
-```powershell
-npm run dev
-```
+### 확인해볼 것
 
-`/login` 에서 회원가입 → 로그인 → 한 줄 남기기. 새로고침해도 남아 있으면 성공입니다.
-
-### 직접 확인해볼 것
-
-- 계정을 **두 개** 만들어 각각 로그인해보세요. 서로의 글이 **안 보입니다.**
-  화면이 아니라 창고가 걸러주는 겁니다 — 그게 RLS 입니다.
-- `supabase/schema.sql` 에서 `enable row level security` 만 빼고 다시 실행하면
-  남의 글이 그대로 보입니다. 한 번 켜보고 꺼보세요. ④회차의 핵심입니다.
-- F12 → Network 탭에서 `/api/lines` 요청을 눌러보세요.
-  무엇을 보냈고 무엇을 받았는지, 상태코드가 200 인지 401 인지 전부 보입니다.
-
-### 자주 막히는 곳
-
-| 증상 | 원인 |
-|---|---|
-| 빌드가 `창고 주소나 열쇠가 없습니다` 로 실패 | `.env.local` 을 안 만들었습니다 (4번) |
-| 로그인은 되는데 목록이 비어 있음 | 정상입니다. 그 계정으로 쓴 글이 아직 없습니다 |
-| 글을 남겼는데 목록에 안 뜸 | RLS 정책이 안 걸렸습니다. `schema.sql` 의 policy 부분을 다시 실행 |
-| 401 이 계속 뜸 | 회원가입 확인 메일 인증이 안 끝났습니다. 스팸함도 보세요 |
+- `/sitemap.xml`, `/robots.txt` 로 직접 접속해보세요. 파일을 만든 적 없는데 주소가 생깁니다.
+- 카톡에 내 주소를 붙여넣어 미리보기 카드가 뜨는지 보세요.
+- 글을 하나 남기고 Vercel Analytics 실시간 화면에서 `post_created` 가 잡히는지 확인하세요.
+  반영에 몇 분 걸릴 수 있습니다.

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import OneLineForm from "@/components/OneLineForm";
 import OneLineList from "@/components/OneLineList";
+import { track } from "@vercel/analytics";
 import { supabase } from "@/lib/supabase";
 import { toOneLine, type LineRow, type OneLine } from "@/lib/store";
 
@@ -79,6 +80,10 @@ export default function HomePage() {
     const json = await res.json();
     setLines((prev) => [toOneLine(json.line as LineRow), ...prev]);
     set알림("");
+
+    // ⑥회차 · 중요한 문에 계수기를 답니다.
+    // "이게 일어나면 성공"이라고 말할 수 있는 행동만 셉니다.
+    track("post_created");
   }
 
   // 웨이터에게 "지워주세요" (DELETE)
