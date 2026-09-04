@@ -18,7 +18,7 @@ export default function OneLineList({ lines, onDelete }: Props) {
           <div className="card-head">
             <span className="nick">{line.nickname}</span>
             <span className="time">
-              {formatTime(line.createdAt)}
+              {formatTime(line.created_at)}
               {onDelete && (
                 <button
                   className="del"

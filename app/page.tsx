@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import OneLineForm from "@/components/OneLineForm";
-import OneLineList from "@/components/OneLineList";
+import OneLineList from "@/components/onelinelist";
 import { supabase } from "@/lib/supabase";
 import { toOneLine, type LineRow, type OneLine } from "@/lib/store";
 
