@@ -26,6 +26,9 @@ export default function RootLayout({
             <Link href="/about" className="navlink">
               소개
             </Link>
+            <Link href="/login" className="navlink">
+              입구
+            </Link>
           </nav>
         </header>
         <main className="main">{children}</main>
