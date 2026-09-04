@@ -1,0 +1,178 @@
+:root {
+  --bg: #14161a;
+  --panel: #1b1e24;
+  --line: #2f343d;
+  --text: #e8eaed;
+  --muted: #8b93a1;
+  --amber: #f5b544;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", sans-serif;
+  line-height: 1.6;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--amber);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.navlink {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.navlink:hover {
+  color: var(--text);
+}
+
+.main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 32px;
+  letter-spacing: -0.5px;
+}
+
+.lead {
+  margin: 0;
+  color: var(--muted);
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.input {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--amber);
+}
+
+.nickname {
+  width: 120px;
+}
+
+.message {
+  flex: 1;
+  min-width: 200px;
+}
+
+.button {
+  background: var(--amber);
+  border: none;
+  border-radius: 8px;
+  color: #14161a;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.button:hover {
+  filter: brightness(1.08);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.nick {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.time {
+  color: var(--muted);
+}
+
+.msg {
+  margin: 0;
+  font-size: 16px;
+}
+
+.empty,
+.hint {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.hint {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line);
+}
+
+.steps {
+  margin-top: 20px;
+  padding-left: 18px;
+  color: var(--muted);
+  display: grid;
+  gap: 6px;
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  color: #565f6d;
+  font-size: 13px;
+  padding: 20px 24px;
+  text-align: center;
+}
